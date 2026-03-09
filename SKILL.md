@@ -4,7 +4,7 @@ description: Look up pool player ratings and handicap data from FargoRate. Use w
 metadata: {"nanobot":{"emoji":"🎱","requires":{"bins":["fargo"]},"install":[{"id":"curl","kind":"script","label":"Install fargo CLI","url":"https://raw.githubusercontent.com/rgstephens/fargo-skill/main/install.sh"}]}}
 ---
 
-<!-- Version: 0.1.0 -->
+<!-- Version: 0.2.1 -->
 
 # FargoRate
 
