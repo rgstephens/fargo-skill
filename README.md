@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/github/v/tag/rgstephens/fargo-skill?label=version&sort=semver)
 
-A [ClawHub](https://clawhub.io/skills/fargorate) skill for the [FargoRate](https://fargorate.com) billiards rating system. Look up players, calculate match odds, get recommended race lengths, and track rating changes over time.
+A [ClawHub](https://clawhub.ai/rgstephens/fargo-skill) skill for the [FargoRate](https://fargorate.com) billiards rating system. Look up players, calculate match odds, get recommended race lengths, and track rating changes over time.
 
 ## Installation
 
