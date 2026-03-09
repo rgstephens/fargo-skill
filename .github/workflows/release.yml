@@ -44,4 +44,4 @@ jobs:
             -H "Authorization: Bearer ${CLAWHUB_API_TOKEN}" \
             -H "Content-Type: application/json" \
             -d "{\"version\": \"${{ steps.version.outputs.version }}\"}" \
-            "https://clawhub.io/api/v1/skills/fargorate"
+            "https://clawhub.ai/api/v1/skills/fargorate"
