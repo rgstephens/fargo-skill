@@ -1,7 +1,19 @@
 ---
 name: fargorate
 description: Look up pool player ratings and handicap data from FargoRate. Use when the user asks about a pool player's rating, FargoRate ID, match odds, race-to recommendations, handicaps, top-ranked pool players, or rating changes over time. A local db can be enabled to track rating changes across runs. Contact fields in the db are local-only and never sent to an API.
-metadata: {"nanobot":{"emoji":"🎱","requires":{"bins":["fargo"]},"install":[{"id":"curl","kind":"script","label":"Install fargo CLI","url":"https://raw.githubusercontent.com/rgstephens/fargo-skill/main/install.sh"}]}}
+version: 0.2.3
+metadata:
+  openclaw:
+    emoji: "🎱"
+    homepage: https://github.com/rgstephens/fargo-skill
+    requires:
+      bins:
+        - fargo
+    install:
+      - id: curl
+        kind: script
+        label: Install fargo CLI
+        url: https://raw.githubusercontent.com/rgstephens/fargo-skill/main/install.sh
 ---
 
 <!-- Version: 0.2.2 -->

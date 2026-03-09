@@ -40,8 +40,8 @@ jobs:
         env:
           CLAWHUB_API_TOKEN: ${{ secrets.CLAWHUB_API_TOKEN }}
         run: |
-          curl -fsSL -X PATCH \
+          zip -r skill.zip SKILL.md scripts/ -x "*.DS_Store"
+          curl -sSL -X POST \
             -H "Authorization: Bearer ${CLAWHUB_API_TOKEN}" \
-            -H "Content-Type: application/json" \
-            -d "{\"version\": \"${{ steps.version.outputs.version }}\"}" \
-            "https://clawhub.ai/api/v1/skills/fargorate"
+            -F "file=@SKILL.md" \
+            "https://clawhub.ai/api/v1/skills"
