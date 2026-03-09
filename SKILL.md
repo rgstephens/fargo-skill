@@ -16,7 +16,7 @@ metadata:
         url: https://raw.githubusercontent.com/rgstephens/fargo-skill/main/install.sh
 ---
 
-<!-- Version: 0.2.2 -->
+<!-- Version: 0.2.3 -->
 
 # FargoRate
 
