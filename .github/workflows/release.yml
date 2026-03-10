@@ -21,27 +21,35 @@ jobs:
         id: version
         run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
 
-      - name: Update VERSION file
-        run: echo "${{ steps.version.outputs.version }}" > VERSION
-
       - name: Update version in SKILL.md
         run: |
-          sed -i "s/<!-- Version: .* -->/<!-- Version: ${{ steps.version.outputs.version }} -->/" SKILL.md
+          sed -i "s/^version: .*/version: ${{ steps.version.outputs.version }}/" SKILL.md
 
       - name: Commit and push version bump
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add VERSION SKILL.md
+          git add SKILL.md
           git diff --staged --quiet || git commit -m "chore: bump version to ${{ steps.version.outputs.version }}"
           git push origin main
 
-      - name: Update ClawHub version
+      - name: Publish to ClawHub
         env:
           CLAWHUB_API_TOKEN: ${{ secrets.CLAWHUB_API_TOKEN }}
         run: |
-          zip -r skill.zip SKILL.md scripts/ -x "*.DS_Store"
+          VERSION=${{ steps.version.outputs.version }}
+
+          SKILL_SIZE=$(wc -c < SKILL.md | tr -d ' ')
+          SKILL_SHA=$(sha256sum SKILL.md | cut -d' ' -f1)
+          INSTALL_SIZE=$(wc -c < install.sh | tr -d ' ')
+          INSTALL_SHA=$(sha256sum install.sh | cut -d' ' -f1)
+
+          PAYLOAD=$(printf '{"slug":"fargorate-skill","displayName":"FargoRate","version":"%s","changelog":"","tags":["pool","billiards","fargorate","handicap","ratings"],"acceptLicenseTerms":true,"files":[{"path":"SKILL.md","size":%s,"sha256":"%s","contentType":"text/markdown"},{"path":"install.sh","size":%s,"sha256":"%s","contentType":"text/x-sh"}]}' \
+            "$VERSION" "$SKILL_SIZE" "$SKILL_SHA" "$INSTALL_SIZE" "$INSTALL_SHA")
+
           curl -sSL -X POST \
-            -H "Authorization: Bearer ${CLAWHUB_API_TOKEN}" \
-            -F "file=@SKILL.md" \
+            -H "Authorization: Bearer $CLAWHUB_API_TOKEN" \
+            -F "payload=$PAYLOAD" \
+            -F "files=@SKILL.md;type=text/markdown" \
+            -F "files=@install.sh;type=text/x-sh" \
             "https://clawhub.ai/api/v1/skills"
