@@ -12,7 +12,7 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -42,8 +42,8 @@ jobs:
           SKILL_SIZE=$(wc -c < SKILL.md | tr -d ' ')
           SKILL_SHA=$(sha256sum SKILL.md | cut -d' ' -f1)
 
-          PAYLOAD=$(printf '{"slug":"fargo-skill","displayName":"FargoRate","version":"%s","changelog":"","tags":["pool","billiards","fargorate","handicap","ratings"],"acceptLicenseTerms":true,"files":[{"path":"SKILL.md","size":%s,"sha256":"%s","contentType":"text/markdown"},{"path":"install.sh","size":%s,"sha256":"%s","contentType":"text/x-sh"}]}' \
-            "$VERSION" "$SKILL_SIZE" "$SKILL_SHA" "$INSTALL_SIZE" "$INSTALL_SHA")
+          PAYLOAD=$(printf '{"slug":"fargo-skill","displayName":"FargoRate","version":"%s","changelog":"","tags":["pool","billiards","fargorate","handicap","ratings"],"acceptLicenseTerms":true,"files":[{"path":"SKILL.md","size":%s,"sha256":"%s","contentType":"text/markdown"}]}' \
+            "$VERSION" "$SKILL_SIZE" "$SKILL_SHA")
 
           curl -sSL -X POST \
             -H "Authorization: Bearer $CLAWHUB_API_TOKEN" \
