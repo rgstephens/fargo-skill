@@ -41,8 +41,6 @@ jobs:
 
           SKILL_SIZE=$(wc -c < SKILL.md | tr -d ' ')
           SKILL_SHA=$(sha256sum SKILL.md | cut -d' ' -f1)
-          INSTALL_SIZE=$(wc -c < install.sh | tr -d ' ')
-          INSTALL_SHA=$(sha256sum install.sh | cut -d' ' -f1)
 
           PAYLOAD=$(printf '{"slug":"fargo-skill","displayName":"FargoRate","version":"%s","changelog":"","tags":["pool","billiards","fargorate","handicap","ratings"],"acceptLicenseTerms":true,"files":[{"path":"SKILL.md","size":%s,"sha256":"%s","contentType":"text/markdown"},{"path":"install.sh","size":%s,"sha256":"%s","contentType":"text/x-sh"}]}' \
             "$VERSION" "$SKILL_SIZE" "$SKILL_SHA" "$INSTALL_SIZE" "$INSTALL_SHA")
@@ -51,5 +49,4 @@ jobs:
             -H "Authorization: Bearer $CLAWHUB_API_TOKEN" \
             -F "payload=$PAYLOAD" \
             -F "files=@SKILL.md;type=text/markdown" \
-            -F "files=@install.sh;type=text/x-sh" \
             "https://clawhub.ai/api/v1/skills"
