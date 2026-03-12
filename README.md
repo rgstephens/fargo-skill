@@ -7,13 +7,8 @@ A [ClawHub](https://clawhub.ai/rgstephens/fargo-skill) skill for the [FargoRate]
 ## Installation
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rgstephens/fargo-skill/main/install.sh | bash
-```
-
-Pin a specific version:
-
-```bash
-VERSION=v0.1.0 bash <(curl -fsSL https://raw.githubusercontent.com/rgstephens/fargo-skill/main/install.sh)
+brew tap rgstephens/fargo
+brew install fargo
 ```
 
 ## Commands
@@ -50,3 +45,26 @@ fargo --changes --db bulk --group monday-league
 ## Releases
 
 See [GitHub Releases](https://github.com/rgstephens/fargo-skill/releases) for changelog and version history.
+
+## ToDo
+
+- Improve fargo skill cli description to help weaker bots
+
+### Example CLI Use Issue
+
+Prompt: give me a table of everyone in the monday group with their rating and robustness. 
+
+```log
+nanobot-gateway  | 2026-03-11 15:47:49.149 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo --db group show monday --json 2>&1"})
+nanobot-gateway  | 2026-03-11 15:47:57.151 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo --db player show 1324244 --json 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:01.494 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo --help 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:03.670 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo bulk --help 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:08.793 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo bulk --group monday --json --db /root/.nanobot/workspace/fargo.db 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:16.989 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo bulk --group monday --db /root/.nanobot/workspace/fargo.db --json 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:20.816 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo group show monday --db /root/.nanobot/workspace/fargo.db --json 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:32.122 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo --db /root/.nanobot/workspace/fargo.db group show monday --json 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:34.656 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo group show monday --db /root/.nanobot/workspace/fargo.db 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:41.022 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo --db /root/.nanobot/workspace/fargo.db group show monday 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:47.857 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo group show monday --db=/root/.nanobot/workspace/fargo.db 2>&1"})
+nanobot-gateway  | 2026-03-11 15:48:51.980 | INFO     | nanobot.agent.loop:_run_agent_loop:230 - Tool call: exec({"command": "fargo bulk 1115327 1119367 1119369 1119371 1119377 1119383 1119384 1132833 1137501 1179210 1190373 1191948 1207397 1209675 1215491 1215492 1277009 1324244 1324636 1327664 1337835 1341511 )
+```
