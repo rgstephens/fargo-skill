@@ -1,0 +1,11 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "FargoRate",
+      "description": "Pool player ratings, match odds, handicap data, and race recommendations from FargoRate.",
+      "skills": ["fargo"]
+    }
+  ]
+}
